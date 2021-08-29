@@ -14,7 +14,9 @@ router.route('/url').post((req, res) => {
   const url = req.body.url;
   let datas;
   (async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disabled-setupid-sandbox"],
+    });
     const page = await browser.newPage();
 
     await page.goto(url, {waitUntil:"networkidle2"});
