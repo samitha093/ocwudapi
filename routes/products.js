@@ -27,9 +27,11 @@ router.route('/url').post((req, res) => {
    // console.log(title)
     
     datas = await page.evaluate(()=>{
-      let data = document.querySelector('div[class="woocommerce-product-details__short-description"]').innerText;
+      let date = document.querySelector('.woocommerce-product-details__short-description :nth-child(2)').innerText;;
+      let version = document.querySelector('.woocommerce-product-details__short-description :nth-child(3)').innerText;;
       return{
-        data
+        date,
+        version
       }
     })
     res.status(200).json(datas);
