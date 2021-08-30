@@ -2,9 +2,11 @@ const router = require('express').Router();
 let Product = require('../models/product.model');
 const puppeteer = require('puppeteer');
 
-
-
 router.route('/').get((req, res) => {
+  res.status(200).json("You Are Connected to api");
+});
+
+router.route('/items').get((req, res) => {
   Product.find({})
   .then(exercises => res.json(exercises))
   .catch(err => res.status(400).json('Error: ' + err));
