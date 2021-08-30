@@ -25,7 +25,7 @@ router.route('/url').post((req, res) => {
         data
       }
     })
-    res.status(400).json(datas);
+    res.status(200).json(datas);
     await browser.close();
   })();
 });
