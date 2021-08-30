@@ -22,17 +22,17 @@ router.route('/url').post((req, res) => {
     await page.goto(url, {waitUntil:"networkidle2"});
     //await page.waitForXPath('/html/body/div[2]/div[2]/div/div/div/div[2]/div[1]/div[3]/div[2]/div[2]')
     //const element = (await page.$x("/html/body/div[2]/div[2]/div/div/div/div[2]/div[1]/div[3]/div[2]/div[2]"))[0];
-    const title = await page.$x("/html/body/div[2]/div[2]/div/div/div/div[2]/div[1]/div[3]/div[2]/div[1]");
+    //const title = await page.$x("/html/body/div[2]/div[2]/div/div/div/div[2]/div[1]/div[3]/div[2]/div[1]");
     //let text = await page.evaluate(h1 => h1.textContent, title[0]);
-    console.log(title)
+   // console.log(title)
     
-//     datas = await page.evaluate(()=>{
-//       let data = document.querySelector('div[class="woocommerce-product-details__short-description"]').innerText;
-//       return{
-//         data
-//       }
-//     })
-    res.status(200).json(element);
+    datas = await page.evaluate(()=>{
+      let data = document.querySelector('div[class="woocommerce-product-details__short-description"]').innerText;
+      return{
+        data
+      }
+    })
+    res.status(200).json(datas);
     await browser.close();
   })();
 });
