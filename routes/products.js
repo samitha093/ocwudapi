@@ -29,12 +29,22 @@ router.route('/url').post((req, res) => {
     datas = await page.evaluate(()=>{
       let date = document.querySelector('.woocommerce-product-details__short-description :nth-child(2)').innerText;;
       let version = document.querySelector('.woocommerce-product-details__short-description :nth-child(3)').innerText;;
+       (async () => {
+         const newproduct = new Product({
+          url,
+          data
+         });
+          newproduct.save()
+            .then(() => res.json('Saved'))
+            .catch(err => res.status(400).json('Error: ' + err));
+       }
+      
       return{
         date,
         version
       }
     })
-    res.status(200).json(datas);
+    //res.status(200).json(datas);
     await browser.close();
   })();
 });
@@ -45,11 +55,12 @@ router.route('/add').post((req, res) => {
   const newproduct = new Product({
     url,
     data
+  });
+  newproduct.save()
+    .then(() => res.json('Saved'))
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
-newproduct.save()
-  .then(() => res.json('Saved'))
-  .catch(err => res.status(400).json('Error: ' + err));
-});
+
 
   module.exports = router;
