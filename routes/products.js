@@ -32,17 +32,17 @@ router.route('/url').post((req, res) => {
        (async () => {
          const newproduct = new Product({
           url,
-          data
+          date
          });
           newproduct.save()
             .then(() => res.json('Saved'))
             .catch(err => res.status(400).json('Error: ' + err));
        }
       
-      return{
-        date,
-        version
-      }
+//       return{
+//         date,
+//         version
+//       }
     })
     //res.status(200).json(datas);
     await browser.close();
